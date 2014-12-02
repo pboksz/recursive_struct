@@ -25,7 +25,7 @@ Passing a hash into the initializer will create an open struct that has all nest
 ```
 hash = { a: { b: true }, c: false }
 struct = RecursiveStruct.new(hash}
-struct.a     # \#<RecursiveStruct b=true>
+struct.a     # #<RecursiveStruct b=true>
 struct.a.b   # true
 struct.c     # false
 ```
