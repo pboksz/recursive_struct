@@ -29,14 +29,14 @@ struct.a.b   # true
 struct.c     # false
 ```
 
-You can also create set any value on any method and it will automatically create the getter and setter.
+You can also use a setter for a method that doesn't exist. A getter and setter will be generated dynamically.
 ```
 struct = RecursiveStruct.new
 struct.a = true
 struct.a # true
 ```
 
-If this value happens to be a hash, it will wrap it in a RecursiveStruct
+If this value happens to be a hash, it will be wrapped in a RecursiveStruct.
 ```
 struct = RecursiveStruct.new
 struct.a = { b: true }
