@@ -1,6 +1,9 @@
 language: ruby
-bundler_args: --without development
 rvm: 2.1.5
 script: bundle exec rspec spec
+deploy:
+  provider: rubygems
+  api_key:
+    secure: X5NHfH+P8ebpXjtXm8J7KFLjZwDOkFmKBeNnW3Vm9CW81nVrG4r1ymOvp1hD1pjOPjBfF8tWmCcLxBgnU++pm1Cz98GxOOTeKZ77iC/CNPZhyor8ANnxqdUkK0sNlpVOn80O+22DBKpUT1Wf21wxsxhQlrnNJuPsBE111EcnkzI=
 notifications:
   email: false
