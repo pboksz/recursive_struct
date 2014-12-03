@@ -1,0 +1,6 @@
+language: ruby
+bundler_args: --without development
+rvm: 2.1.5
+script: bundle exec rspec spec
+notifications:
+  email: false
