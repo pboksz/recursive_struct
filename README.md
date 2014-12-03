@@ -21,13 +21,26 @@ Or install it yourself as:
 ## Usage
 
 Passing a hash into the initializer will create an open struct that has all nested getter and setter methods.
-
 ```
 hash = { a: { b: true }, c: false }
 struct = RecursiveStruct.new(hash}
-struct.a     # #<RecursiveStruct b=true>
+struct.a     # #<RecursiveStruct @data={:b=>true}>
 struct.a.b   # true
 struct.c     # false
+```
+
+You can also create set any value on any method and it will automatically create the getter and setter.
+```
+struct = RecursiveStruct.new
+struct.a = true
+struct.a # true
+```
+
+If this value happens to be a hash, it will wrap it in a RecursiveStruct
+```
+struct = RecursiveStruct.new
+struct.a = { b: true }
+struct a # #<RecursiveStruct @data={:b=>true}>
 ```
 
 ## Contributing
