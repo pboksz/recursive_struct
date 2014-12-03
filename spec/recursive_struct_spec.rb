@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe RecursiveStruct do
+  let(:hash) { nil }
   subject { RecursiveStruct.new(hash) }
 
   describe 'hash is nil' do
-    let(:hash) { nil }
     it { expect(subject).to be_a RecursiveStruct }
   end
 
@@ -44,6 +44,29 @@ describe RecursiveStruct do
     describe 'setting an array' do
       before { subject.one = [1, 2] }
       it { expect(subject.one).to be_an Array }
+    end
+  end
+
+  describe '#method_missing' do
+    describe 'valid setter' do
+      describe 'single value' do
+        before { subject.one = true }
+        it { expect(subject.one).to be_true }
+      end
+
+      describe 'array value' do
+        before { subject.one = [1, 2] }
+        it { expect(subject.one).not_to be_empty }
+      end
+
+      describe 'hash value' do
+        before { subject.one = { two: true } }
+        it { expect(subject.one.two).to be_true }
+      end
+    end
+
+    describe 'invalid method' do
+      it { expect { subject.one }.to raise_error NoMethodError }
     end
   end
 end

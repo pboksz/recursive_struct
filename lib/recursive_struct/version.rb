@@ -1,3 +1,3 @@
-class RecursiveStruct < OpenStruct
-  VERSION = "0.0.2"
+class RecursiveStruct
+  VERSION = '0.0.3'
 end
