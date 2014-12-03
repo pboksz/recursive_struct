@@ -10,12 +10,12 @@ describe RecursiveStruct do
 
   describe 'hash exists' do
     let(:hash) { { one: true } }
-    it { expect(subject.one).to be_true }
+    it { expect(subject.one).to be true }
   end
 
   describe 'nested hash' do
     let(:hash) { { one: { two: true } } }
-    it { expect(subject.one.two).to be_true }
+    it { expect(subject.one.two).to be true }
   end
 
   describe 'hash with array' do
@@ -28,12 +28,12 @@ describe RecursiveStruct do
 
     describe 'nested setter' do
       before { subject.one.two = false }
-      it { expect(subject.one.two).to be_false }
+      it { expect(subject.one.two).to be false }
     end
 
     describe 'top level setter' do
       before { subject.one = false }
-      it { expect(subject.one).to be_false }
+      it { expect(subject.one).to be false }
     end
 
     describe 'setting a hash' do
@@ -51,7 +51,7 @@ describe RecursiveStruct do
     describe 'valid setter' do
       describe 'single value' do
         before { subject.one = true }
-        it { expect(subject.one).to be_true }
+        it { expect(subject.one).to be true }
       end
 
       describe 'array value' do
@@ -61,7 +61,7 @@ describe RecursiveStruct do
 
       describe 'hash value' do
         before { subject.one = { two: true } }
-        it { expect(subject.one.two).to be_true }
+        it { expect(subject.one.two).to eq true }
       end
     end
 
