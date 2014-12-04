@@ -1,8 +1,12 @@
+require 'recursive_struct/data'
+
 class RecursiveStruct
+  include RecursiveStruct::Data
+
   def initialize(hash = nil)
     if hash
       hash.each do |key, value|
-        add_data(key, process(value))
+        set_data(key, value)
       end
     end
   end
@@ -10,8 +14,10 @@ class RecursiveStruct
   def method_missing(name, *args)
     key = name.to_s
 
-    if key.chomp!('=') && args.length == 1
-      add_data(key, process(args.first))
+    if key.include?('=')
+      add_setter(key.chomp('='), *args)
+    elsif data.respond_to?(key)
+      send_data(key, *args)
     elsif args.length == 0
       get_data(key)
     else
@@ -25,25 +31,11 @@ class RecursiveStruct
     value.is_a?(Hash) ? self.class.new(value) : value
   end
 
-  def data
-    @data ||= {}
-  end
-
-  def add_data(key, value)
-    key = key.to_sym
-
-    data[key] = value
-    define_methods(key)
-  end
-
-  def get_data(key)
-    data[key.to_sym]
-  end
-
-  def define_methods(key)
-    unless respond_to?(key)
-      define_singleton_method(key) { data[key] }
-      define_singleton_method("#{key}=") { |value| data[key] = value }
+  def add_setter(key, *args)
+    if key == '[]' && args.length == 2
+      set_data(args.first, args.last)
+    elsif args.length == 1
+      set_data(key, args.first)
     end
   end
 end

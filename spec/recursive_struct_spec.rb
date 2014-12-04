@@ -54,6 +54,12 @@ describe RecursiveStruct do
         it { expect(subject.one).to be true }
       end
 
+      describe 'hash setter' do
+        before { subject[:one] = true }
+        it { expect(subject[:one]).to be true }
+        it { expect(subject.one).to be true }
+      end
+
       describe 'array value' do
         before { subject.one = [1, 2] }
         it { expect(subject.one).not_to be_empty }
@@ -71,6 +77,10 @@ describe RecursiveStruct do
 
     describe 'invalid method' do
       it { expect { subject.one(1) }.to raise_error NoMethodError }
+    end
+
+    describe 'responds to hash methods' do
+      it { expect { subject.keys }.not_to raise_error }
     end
   end
 end
