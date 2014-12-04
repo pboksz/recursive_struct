@@ -65,8 +65,12 @@ describe RecursiveStruct do
       end
     end
 
+    describe 'invalid getter' do
+      it { expect(subject.one).to be_nil }
+    end
+
     describe 'invalid method' do
-      it { expect { subject.one }.to raise_error NoMethodError }
+      it { expect { subject.one(1) }.to raise_error NoMethodError }
     end
   end
 end

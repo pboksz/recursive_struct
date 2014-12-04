@@ -12,6 +12,8 @@ class RecursiveStruct
 
     if key.chomp!('=') && args.length == 1
       add_data(key, process(args.first))
+    elsif args.length == 0
+      get_data(key)
     else
       super(name, *args)
     end
@@ -32,6 +34,10 @@ class RecursiveStruct
 
     data[key] = value
     define_methods(key)
+  end
+
+  def get_data(key)
+    data[key.to_sym]
   end
 
   def define_methods(key)
