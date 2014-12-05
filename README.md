@@ -27,13 +27,16 @@ struct = RecursiveStruct.new(hash}
 struct.a     # #<RecursiveStruct @data={:b=>true}>
 struct.a.b   # true
 struct.c     # false
+struct.d     # nil
 ```
 
 You can also use a setter for a method that doesn't exist. A getter and setter will be generated dynamically.
 ```
 struct = RecursiveStruct.new
 struct.a = true
-struct.a # true
+struct[:b] = true
+struct.a   # true
+struct[:b] # true
 ```
 
 If this value happens to be a hash, it will be wrapped in a RecursiveStruct.
