@@ -4,11 +4,7 @@ class RecursiveStruct
   include RecursiveStruct::Data
 
   def initialize(hash = nil)
-    if hash
-      hash.each do |key, value|
-        set_data(key, value)
-      end
-    end
+    hash.each { |key, value| set_data(key, value) } if hash
   end
 
   def method_missing(name, *args)
@@ -26,10 +22,6 @@ class RecursiveStruct
   end
 
   private
-
-  def process(value)
-    value.is_a?(Hash) ? self.class.new(value) : value
-  end
 
   def add_setter(key, *args)
     if key == '[]' && args.length == 2
