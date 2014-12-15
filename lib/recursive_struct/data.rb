@@ -15,8 +15,8 @@ class RecursiveStruct
       data[key.to_sym]
     end
 
-    def send_data(key, *args)
-      data.send(key, *args)
+    def send_data(key, *args, &block)
+      data.send(key, *args, &block)
     end
 
     private

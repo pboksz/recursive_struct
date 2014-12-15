@@ -7,17 +7,17 @@ class RecursiveStruct
     hash.each { |key, value| set_data(key, value) } if hash
   end
 
-  def method_missing(name, *args)
+  def method_missing(name, *args, &block)
     key = name.to_s
 
     if key.include?('=')
       add_setter(key.chomp('='), *args)
     elsif data.respond_to?(key)
-      send_data(key, *args)
+      send_data(key, *args, &block)
     elsif args.length == 0
       get_data(key)
     else
-      super(name, *args)
+      super(name, *args, &block)
     end
   end
 
