@@ -15,12 +15,20 @@ describe RecursiveStruct do
 
   describe 'nested hash' do
     let(:hash) { { one: { two: true } } }
+    it { expect(subject.one).to be_a RecursiveStruct }
     it { expect(subject.one.two).to be true }
   end
 
   describe 'hash with array' do
-    let(:hash) { { one: { two: [1, 2, 3] } } }
-    it { expect(subject.one.two).not_to be_empty }
+    let(:hash) { { one: [1, 2, 3] } }
+    it { expect(subject.one).to be_an Array }
+    it { expect(subject.one).not_to be_empty }
+  end
+
+  describe 'hash with array of hashes' do
+    let(:hash) { { one: [{ two: true }] } }
+    it { expect(subject.one.first).to be_a RecursiveStruct }
+    it { expect(subject.one.first.two).to be true }
   end
 
   describe 'proper setter is created' do

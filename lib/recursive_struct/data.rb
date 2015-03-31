@@ -22,7 +22,13 @@ class RecursiveStruct
     private
 
     def process(value)
-      value.is_a?(Hash) ? RecursiveStruct.new(value) : value
+      if value.is_a?(Hash)
+        RecursiveStruct.new(value)
+      elsif value.is_a?(Array)
+        value.map { |val| process(val) }
+      else
+        value
+      end
     end
 
     def define_methods(key)
